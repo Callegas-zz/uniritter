@@ -22,7 +22,7 @@
                 $login = addslashes($_POST['login']);
                 $password = addslashes($_POST['password']);
                 
-                $user = $userDAO->login($senha, $login);
+                $user = $userDAO->login($password, $login);
                 
                 if ($user == true) {
                     session_start();
