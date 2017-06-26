@@ -13,6 +13,7 @@
         <title></title>
     </head>
     <body>
+    
         <form method="POST" action="index.php">
             User: <input type="text" name="login"> <br />
             Password: <input type="password" name="password"> <br />
