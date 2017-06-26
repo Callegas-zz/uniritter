@@ -19,13 +19,15 @@
             <input type="submit" name="Enter" value="Enter">
         </form>
         
+        
+        
         <?php
             if ($_POST) {
                 include './class/DAO/Connection.class.php';
                 include './class/DAO/UserDAO.class.php';
                 
                 $userDAO = new UserDAO();
-                
+                                
                 $login = addslashes($_POST['login']);
                 $password = addslashes($_POST['password']);
                 

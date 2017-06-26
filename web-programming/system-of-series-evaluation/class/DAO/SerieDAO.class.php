@@ -2,21 +2,20 @@
 
 include_once "Connection.class.php";
 
-class UserDAO {
+class SerieDAO {
     private $connection;
-    
+
     public function __construct() {
         $this->connection = new Connection();
     }
-    
-    public function login($password, $login) {
+
+    public function getSeries() {
         try {
-            $cst = $this->connection->connect()->prepare("SELECT * FROM user WHERE userLogin = '$login' AND userPassword = '$password'");
+            $cst = $this->connection->connect()->prepare("SELECT * FROM serie");
             $cst->execute();
             return $cst->fetchAll();
-        }catch (PDOException $e) {
+        } catch (PDOException $e) {
             return 'Error: ' . $e->getMessage();
         }
     }
-    
 }

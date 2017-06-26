@@ -1,19 +1,28 @@
 <?php
 
-class Connection {
-    private $user = "root";
-    private $password = "";
-    private $path = "localhost";
-    private $dataBase = "web2";
-    private $connection = "";
-    private $errorMessage = "Connection to database failed";
-    
-    public function __construct() {
-        $this->connection = mysqli_connect($this->path, $this->user, $this->password) or die ($this->errorMessage);
-        mysqli_select_db($this->connection, $this->dataBase) or die ($this->errorMessage);
-    }
-    
-    public function getConnection(){
-        return $this->connection;
-    }
+class Connection{
+	
+	private $user;
+	private $password;
+	private $dataBase;
+	private $path;
+	private static $pdo;
+	
+	public function __construct(){	
+                $this->user = "root"; 
+                $this->password = "";
+                $this->dataBase = "web2";
+		$this->path = "localhost";		
+	}
+	
+	public function connect(){
+		try{
+			if(is_null(self::$pdo)){
+				self::$pdo = new PDO("mysql:host=".$this->path.";dbname=".$this->dataBase, $this->user, $this->password);
+			}
+			return self::$pdo;
+		}catch(PDOException $e){
+			echo 'Error: '.$e->getMessage();
+		}
+	}
 }
