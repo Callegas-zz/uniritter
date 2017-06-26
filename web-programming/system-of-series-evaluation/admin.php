@@ -29,21 +29,37 @@ if ($_SESSION['logged'] === false) {
 	Wellcome <?php print_r($_SESSION['login']); ?>
 	<a href="./logout.php">Logout</a>
 
+
 	<br> <br> <br>
 
-	<h2> Register new movie </h2>
+	<h2> Register new serie </h2>
 	
 	<form method="POST" action="admin.php">
 		Name: <input type="text" name="name"> 
 		Describe: <input type="text" name="describe"> 
 		Total Seasons: <input type="number" name="seasons"> 
-		<input type="submit" name="register" value="register">
+		<input type="submit" name="registerNewSerie" value="registerNewSerie">
 	</form>
 
 
 	<?php showAllSeries(); ?>   
 
 	<?php registerSerie(); ?>      
+
+	<br> <br> <br>
+
+	<h2> Register the last episode view </h2>
+
+	<form method="POST" action="admin.php">
+		Serie: <input type="text" name="serie"> 
+		Season: <input type="number" name="season"> 
+		Episode: <input type="number" name="episode"> 
+		<input type="submit" name="registerActivity" value="registerActivity">
+	</form>
+
+	<?php showActivity(); ?>   
+
+	<?php registerActivity(); ?>      
 
 
 </body>
@@ -70,7 +86,7 @@ function showAllSeries(){
 
 	foreach($serieDAO->getSeries() as $s){  
 		echo "<tr>" .
-		"<td>" . $s['name'] . "</td>" .
+		"<td>" . $s['serieName'] . "</td>" .
 		"<td>" . $s['serieDescribe'] . "</td>" .
 		"<td>" . $s['totalSeasons'] . "</td>" .
 		"<td>" . $s['rate'] . "</td>" .
@@ -90,6 +106,47 @@ function registerSerie(){
 
 		$serieDAO->registerSerie($name, $describe, $seasons);
 	}
+}
+
+
+function showActivity(){
+	include './class/DAO/ActivityDAO.class.php';
+
+	$activityDAO = new ActivityDAO();
+
+	echo "<h1>Activity</h1>";
+
+	echo "<table>" .
+	"<tr>" .
+	"<th>Serie</th>" .
+	"<th>Current Season</th>" .
+	"<th>Episode</th>" .
+	"</tr>";
+
+	foreach($activityDAO->getActivity() as $a){  
+		echo "<tr>" .
+		"<td>" . $activityDAO->getSerieName($a['serieId'])['serieName'] . "</td>" .
+		"<td>" . $a['currentSeason'] . "</td>" .
+		"<td>" . $a['currentEpisode'] . "</td>" .
+		"</tr>";
+	}
+
+	echo "</table>";
+
+}
+
+function registerActivity(){
+
+	if ($_POST) {
+		$ActivityDAO = new activityDAO();
+
+		$serieName = addslashes($_POST['serie']);
+		$season = addslashes($_POST['season']);
+		$episode = addslashes($_POST['episode']);	
+
+		$activityDAO->registerActivity($serieName, $season, $episode);
+	}
+
 }
 
 

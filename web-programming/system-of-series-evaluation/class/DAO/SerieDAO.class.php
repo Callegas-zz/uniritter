@@ -23,9 +23,8 @@ class SerieDAO {
     public function registerSerie($name, $serieDescribe, $totalSeasons) {
         try{
               
-            $cst = $this->connection->connect()->prepare("INSERT INTO serie (name, serieDescribe, totalSeasons)
+            $cst = $this->connection->connect()->prepare("INSERT INTO serie (serieName, serieDescribe, totalSeasons)
                                                           VALUES ('$name', '$serieDescribe', '$totalSeasons');");   
-
             if($cst->execute()){
                 return 'ok';
             }else{

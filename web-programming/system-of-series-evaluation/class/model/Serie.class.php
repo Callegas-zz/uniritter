@@ -2,7 +2,7 @@
 
 class Serie {
     private $serieId;
-    private $name;
+    private $serieName;
     private $serieDescribe;
     private $totalSeasons;
     private $rate;
@@ -11,8 +11,8 @@ class Serie {
         return $this->serieId;
     }
 
-    function getName() {
-        return $this->name;
+    function getSerieName() {
+        return $this->serieName;
     }
 
     function getSerieDescribe() {
@@ -31,8 +31,8 @@ class Serie {
         $this->serieId = $serieId;
     }
 
-    function setName($name) {
-        $this->name = $name;
+    function setSerieName($serieName) {
+        $this->serieName = $serieName;
     }
 
     function setSerieDescribe($serieDescribe) {

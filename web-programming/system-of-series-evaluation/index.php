@@ -21,7 +21,6 @@
         </form>
         
         
-        
         <?php
             if ($_POST) {
                 include './class/DAO/Connection.class.php';
