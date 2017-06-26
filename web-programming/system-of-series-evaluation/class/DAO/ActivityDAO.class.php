@@ -10,9 +10,9 @@ class ActivityDAO {
         
     }
 
-    public function getActivity() {
+    public function getActivity($user) {
         try {
-            $cst = $this->connection->connect()->prepare("SELECT * FROM serie_user");
+            $cst = $this->connection->connect()->prepare("SELECT * FROM serie_user WHERE userId = '$user'");
             $cst->execute();
             return $cst->fetchAll();
         } catch (PDOException $e) {
@@ -40,12 +40,23 @@ class ActivityDAO {
         }
     }
 
-    public function registerActivity($serieId, $season, $episode) {
+    public function getCurrentUserId($user) {
+        try {
+            $cst = $this->connection->connect()->prepare("SELECT userId FROM user WHERE userLogin = '$user'");
+            $cst->execute();
+            return $cst->fetch();
+        } catch (PDOException $e) {
+            return 'Error: ' . $e->getMessage();
+        }
+
+    }
+
+    public function registerActivity($userId, $serieId, $season, $episode) {
         try{
-            $userId = 1;
+            $userId = $userId['userId'];
             $serieId = $serieId['serieId'];
             $cst = $this->connection->connect()->prepare("INSERT INTO serie_user (userId, serieId, currentSeason, currentEpisode)
-              VALUES ('$userId', '$serieId', '$season', '$episode');");   
+               VALUES ('$userId', '$serieId', '$season', '$episode');");   
             if($cst->execute()){
                 return 'ok';
             }else{
@@ -56,7 +67,5 @@ class ActivityDAO {
         }
 
     }
-
-
 
 }

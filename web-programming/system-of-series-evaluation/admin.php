@@ -35,9 +35,9 @@ if ($_SESSION['logged'] === false) {
 	<h2> Register new serie </h2>
 	
 	<form method="POST" action="admin.php">
-		Name: <input type="text" name="name"> 
-		Describe: <input type="text" name="describe"> 
-		Total Seasons: <input type="number" name="seasons"> 
+		Name: <input required type="text" name="name"> 
+		Describe: <input required type="text" name="describe"> 
+		Total Seasons: <input required type="number" name="seasons"> 
 		<input type="submit" name="registerNewSerie" value="registerNewSerie">
 	</form>
 
@@ -51,17 +51,16 @@ if ($_SESSION['logged'] === false) {
 	<h2> Register the last episode view </h2>
 
 	<form method="POST" action="admin.php">
-		Serie: <input type="text" name="serie"> 
-		Season: <input type="number" name="season"> 
-		Episode: <input type="number" name="episode"> 
+		Serie: <input required type="text" name="serie"> 
+		Season: <input required type="number" name="season"> 
+		Episode: <input required type="number" name="episode"> 
 		<input type="submit" name="registerActivity" value="registerActivity">
 	</form>
 
 	<?php showActivity(); ?>   
 
 	<?php registerActivity(); ?>      
-
-
+	
 </body>
 </html>
 
@@ -123,7 +122,9 @@ function showActivity(){
 	"<th>Episode</th>" .
 	"</tr>";
 
-	foreach($activityDAO->getActivity() as $a){  
+	$user = array_shift($activityDAO->getCurrentUserId($_SESSION['login']));
+
+	foreach($activityDAO->getActivity($user) as $a){  
 		echo "<tr>" .
 		"<td>" . $activityDAO->getSerieName($a['serieId'])['serieName'] . "</td>" .
 		"<td>" . $a['currentSeason'] . "</td>" .
@@ -145,7 +146,9 @@ function registerActivity(){
 		$episode = addslashes($_POST['episode']);	
 
 		$serieId = $activityDAO->getSerieId($serieName);
-		$activityDAO->registerActivity($serieId, $season, $episode);
+		$userId = $activityDAO->getCurrentUserId($_SESSION['login']);
+
+		$activityDAO->registerActivity($userId, $serieId, $season, $episode);
 	}
 
 }
