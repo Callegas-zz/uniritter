@@ -138,13 +138,14 @@ function showActivity(){
 function registerActivity(){
 
 	if ($_POST) {
-		$ActivityDAO = new activityDAO();
+		$activityDAO = new ActivityDAO();
 
 		$serieName = addslashes($_POST['serie']);
 		$season = addslashes($_POST['season']);
 		$episode = addslashes($_POST['episode']);	
 
-		$activityDAO->registerActivity($serieName, $season, $episode);
+		$serieId = $activityDAO->getSerieId($serieName);
+		$activityDAO->registerActivity($serieId, $season, $episode);
 	}
 
 }

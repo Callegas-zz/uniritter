@@ -40,12 +40,10 @@ class ActivityDAO {
         }
     }
 
-    public function registerActivity($serieName, $season, $episode) {
-        echo "aaaaaaaaaa";
+    public function registerActivity($serieId, $season, $episode) {
         try{
             $userId = 1;
-            $serieID = getSerieId($serieName)['serieId'];
-            echo $serieId;
+            $serieId = $serieId['serieId'];
             $cst = $this->connection->connect()->prepare("INSERT INTO serie_user (userId, serieId, currentSeason, currentEpisode)
               VALUES ('$userId', '$serieId', '$season', '$episode');");   
             if($cst->execute()){
