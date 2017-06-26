@@ -2,9 +2,11 @@
 
 <?php
     session_start();
-    if (!(isset($_SESSION['login']))){
-        header("Location: admin.php");
+        
+    if ($_SESSION['logged'] === false) {
+	header("Location: ./index.php");
     }
+      
 ?>
 
 <html>
@@ -14,6 +16,7 @@
     </head>
     <body>
         logged
+        <a href="./logout.php">Logout</a>
         <?php
         // put your code here
         ?>

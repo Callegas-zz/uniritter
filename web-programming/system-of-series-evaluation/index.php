@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 
+<?php
+    session_start();
+    if ($_SESSION['logged'] === true) {
+	header("Location: ./admin.php");
+    }
+?>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -27,7 +34,7 @@
                 if ($user == true) {
                     session_start();
                     $_SESSION['login'] = $login;
-                    $_SESSION['password'] = $password;
+                    $_SESSION['logged'] = true;
                     header("location: admin.php");
                 }else {
                     header("location: index.php?error=password");
