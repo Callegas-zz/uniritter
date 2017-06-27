@@ -46,6 +46,7 @@ class SerieDAO {
 
     }
 
+
     public function getRate($serieId) {
         try {   
             $cst = $this->connection->connect()->prepare("SELECT ROUND(AVG(rate), 1) FROM serie_rating WHERE serieId = '$serieId';");
