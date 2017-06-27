@@ -71,6 +71,7 @@ function showAllSeries(){
 	include './class/DAO/Connection.class.php';
 	include './class/DAO/SerieDAO.class.php';
 
+
 	$serieDAO = new SerieDAO();
 
 	echo "<h1>Registered Series</h1>";
@@ -91,15 +92,18 @@ function showAllSeries(){
 		"<td>" . $s['serieDescribe'] . "</td>" .
 		"<td>" . $s['totalSeasons'] . "</td>";
 
-		if (isset($s['rate'])) {
-			echo "<td>" . $s['rate'] . "</td>";
+
+		if (array_shift($serieDAO->getRate($s['serieId'])) != null) {
+			echo "<td>" . 
+			array_shift($serieDAO->getRate($s['serieId'])) . 
+			"</td>";
 		}else{
 			echo "<td> not rated </td>";
 		}
+
 		echo "<td><a href='removeSerie.php?id=" . $s['serieId'] . "'>remove</a>" .
-			
-			"<td><a href='rate.php?id=" . $s['serieId'] . "'>rate</a>" .
-			"</tr>";
+		"<td><a href='rate.php?serieId=" . $s['serieId'] . "'>rate</a>" .
+		"</tr>";
 	}
 
 	echo "</table>";

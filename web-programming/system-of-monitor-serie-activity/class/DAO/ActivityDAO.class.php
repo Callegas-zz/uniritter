@@ -1,5 +1,4 @@
 <?php
-
 include_once "Connection.class.php";
 
 class ActivityDAO {
@@ -40,7 +39,7 @@ class ActivityDAO {
         }
     }
 
-          public function remove($id) {
+    public function remove($id) {
         try {
             $cst = $this->connection->connect()->prepare("DELETE FROM serie_user WHERE serie_user_id = '$id'");
             $cst->execute();
@@ -78,11 +77,18 @@ class ActivityDAO {
 
     }
 
-    public function rate($userId, $serieId, $rate) {
+    public function rate($userId, $rate, $serie) {
         try{
-            echo $userId . $serieId . $rate;
-            $cst = $this->connection->connect()->prepare("INSERT INTO serie_rating (userId, serieId, rate)
-                                                          VALUES ('$userId', '$serieId', '$rate');");   
+            if ($rate > 5){
+                $rate = 5;
+            }     
+
+            if ($rate < 0){
+                $rate = 0;
+            }   
+            
+            $cst = $this->connection->connect()->prepare("INSERT INTO serie_rating (userId, serieId, rate) 
+                                                          VALUES ('$userId', '$serie', '$rate');");   
             if($cst->execute()){
                 return 'ok';
             }else{
@@ -93,5 +99,6 @@ class ActivityDAO {
         }
 
     }
+
 
 }

@@ -20,7 +20,7 @@ class SerieDAO {
         }
     }
 
-      public function remove($id) {
+    public function remove($id) {
         try {
             $cst = $this->connection->connect()->prepare("DELETE FROM serie WHERE serieId = '$id'");
             $cst->execute();
@@ -32,9 +32,9 @@ class SerieDAO {
 
     public function registerSerie($name, $serieDescribe, $totalSeasons) {
         try{
-            
+
             $cst = $this->connection->connect()->prepare("INSERT INTO serie (serieName, serieDescribe, totalSeasons)
-                                                          VALUES ('$name', '$serieDescribe', '$totalSeasons');");   
+              VALUES ('$name', '$serieDescribe', '$totalSeasons');");   
             if($cst->execute()){
                 return 'ok';
             }else{
@@ -44,6 +44,16 @@ class SerieDAO {
             return 'Error: '.$e->getMessage();
         }
 
+    }
+
+    public function getRate($serieId) {
+        try {   
+            $cst = $this->connection->connect()->prepare("SELECT ROUND(AVG(rate), 1) FROM serie_rating WHERE serieId = '$serieId';");
+            $cst->execute();
+            return $cst->fetch();
+        } catch (PDOException $e) {
+            return 'Error: ' . $e->getMessage();
+        }
     }
 
 }

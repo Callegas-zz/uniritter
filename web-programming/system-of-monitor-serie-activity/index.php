@@ -19,8 +19,7 @@
             Password: <input type="password" name="password"> <br />
             <input type="submit" name="Enter" value="Enter">
         </form>
-        
-        
+                
         <?php
             if ($_POST) {
                 include './class/DAO/Connection.class.php';
