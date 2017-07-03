@@ -10,7 +10,7 @@ class Connection{
 
 	public function __construct(){
 		$this->user = "root";
-		$this->password = "318homens";
+		$this->password = "";
 		$this->dataBase = "web2";
 		$this->path = "localhost";
 	}
