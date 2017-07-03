@@ -40,7 +40,7 @@ if ($_SESSION['logged'] === false) {
 	}
 
 	</style>
-	
+
 </head>
 <body>
 
