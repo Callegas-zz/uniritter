@@ -1,20 +1,20 @@
 <?php
 
 class Connection{
-	
+
 	private $user;
 	private $password;
 	private $dataBase;
 	private $path;
 	private static $pdo;
-	
-	public function __construct(){	
-        $this->user = "root"; 
+
+	public function __construct(){
+        $this->user = "root";
         $this->password = "";
         $this->dataBase = "web2";
-		$this->path = "localhost";		
+		$this->path = "localhost";
 	}
-	
+
 	public function connect(){
 		try{
 			if(is_null(self::$pdo)){
