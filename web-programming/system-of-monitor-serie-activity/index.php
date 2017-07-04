@@ -46,7 +46,9 @@ if ($_SESSION['logged'] === true) {
         <label for="password">Password:</label>
         <input type="password" class="form-control" name="password">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="text-right">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
     </form>
   </div>
 

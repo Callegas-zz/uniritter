@@ -19,7 +19,7 @@ if (isset($_GET['serieId'])) {
 <body>
 
   <div class="container">
-
+    
     <form method="GET" action="rate.php">
       <div class="form-group">
         <label for="note">Note:</label>
