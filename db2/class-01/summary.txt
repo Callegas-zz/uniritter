@@ -1,0 +1,33 @@
+- PLANO DE ENSINO
+	revisao sql
+	juncoes externas
+	visoes
+	stored procedures
+	triggers
+	controle de concorrencia, niveis de insolamento
+	conceitos basicos de processamento de transacoes
+	propriedades de transacao
+	organizacao dos arquivos e indices
+	arvore de execucao das consultas
+	operacoes logicas e custos associados
+	catalogo de banco de dados
+	seguranca em banco de dados
+	desenvolvimento de aplicacoes utilizando orm
+	nosql - banco de dados orientado a grafos e documentos
+	
+- CRITERIOS DE AVALIACAO
+	GA = (3 tarefas * 0,3) + (Avaliacao GA * 0,7)
+		Prova 26/09/17
+	GB = (4 tarefas * 0,4) + (Avaliacao GB * 0,6)
+		Prova 28/11/17
+		
+	ENADE: 1 PONTO EXTRA NO GB
+
+
+
+- REVISÃO BANCO 1
+	DML/DDL
+		table, colunas etc...
+		instruções sql
+		tipos de dados 
+		
