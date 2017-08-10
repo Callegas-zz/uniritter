@@ -1,0 +1,38 @@
+- PLANO DE ENSINO
+	Introducao a arquitetura e organizacao de computadores e sistemas numericos
+	Sistema numericos, Revisão algebra booleana e simplificacao de expressoes logicas
+	Mapa de Karnaught
+	Logicas combinacionais
+	Multiplexador, Decodificadcor, Somador (Half-Adder e Full-Adder)
+	Circuitos complexos a partir da tabela verdade
+	Maxtermos e Mintermos
+	Logica sequencial. Latch SR, Latch JK e Latch D. Flip-flops Waveform
+	Registradores de deslocamento e contadores
+	CISC vs RISC - sistema de numeracao
+	Introducao ao processados x86. Conjunto de instruções
+	Assembly
+	Hierarquia de Memoria. Memorias Caches
+	Hierarquia de Barramentos.
+	
+	
+- CRITERIOS DE AVALIACAO
+	GA = (2 avaliacoes GA) * 1,0
+		Prova 30/08/17
+	GB = (1 trabalho * 0,7) + (Avaliacao GB * 0,3)
+		Prova 28/11/17
+		
+	ENADE: 1 PONTO EXTRA NO GB
+
+- INDICACOES
+	inovacaotecnologica.com.br
+	
+- INTRODUCAO
+	Desempenho, classe de software, debugging
+	Abstracao do hardware
+	Abstracao de software
+	Niveis de maquina
+	Virtualizacao
+	Historia
+	Lei de Moore
+	Processadores
+	Arquitetura ARM

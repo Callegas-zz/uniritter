@@ -15,6 +15,7 @@
 	desenvolvimento de aplicacoes utilizando orm
 	nosql - banco de dados orientado a grafos e documentos
 	
+	
 - CRITERIOS DE AVALIACAO
 	GA = (3 tarefas * 0,3) + (Avaliacao GA * 0,7)
 		Prova 26/09/17
@@ -22,7 +23,6 @@
 		Prova 28/11/17
 		
 	ENADE: 1 PONTO EXTRA NO GB
-
 
 
 - REVISÃO BANCO 1
