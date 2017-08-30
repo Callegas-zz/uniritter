@@ -1,4 +1,3 @@
-
 CREATE SEQUENCE tipo_curso_tipo_curso_id_seq_1;
 
 CREATE TABLE Tipo_Curso (
@@ -153,6 +152,7 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+
 INSERT INTO Tipo_curso
 	(nome)
 VALUES
@@ -205,12 +205,54 @@ VALUES
 
 -- 4.1) Listar os dados dos alunos;
 SELECT * FROM Aluno
+
 -- 4.2) Listar os dados dos alunos e as turmas que eles estão matriculados;
+SELECT a.*, t.turma_id FROM Aluno a, Matricula m, Turma t
+WHERE a.aluno_id = m.aluno_id AND m.turma_id = t.turma_id;
+
 -- 4.3) Listar os alunos que não possuem faltas;
+SELECT alu.* FROM Aluno alu, Matricula m, Ausencia aus
+WHERE alu.aluno_id = m.aluno_id AND m.matricula_id = aus.matricula_id;
+
 -- 4.4) Listar os professores e a quantidade de turmas que cada um leciona;
--- 4.5) Listar nome dos professores, apenas um dos números de telefone do professor, dados (id da turma, data início, data fim e horário) das turmas que o professor leciona, curso da turma e alunos matriculados ordenado por nome do professor, id turma e nome do aluno; 
--- 4.6) Listar os nomes dos professores e a turma que cada um leciona com maior número de alunos;   
+SELECT p.*, 
+     ( SELECT COUNT(1)
+          FROM Turma t
+      WHERE p.professor_id = t.professor_id ) as total_turmas
+FROM Professor p;	
+
+-- 4.5) Listar nome dos professores, apenas um dos números de telefone do professor,
+-- dados (id da turma, data início, data fim e horário) das turmas que o professor leciona,
+-- curso da turma e alunos matriculados ordenado por nome do professor, id turma e nome do aluno; 
+SELECT p.nome,
+	(SELECT t.numero
+     	FROM Telefone_Professor t
+     WHERE t.professor_id = p.professor_id
+     LIMIT 1 ) AS telefone,
+     t.turma_id, t.data_inicial, t.data_final, t.horario_aula,
+     tc.nome as nome_curso
+     FROM Professor p INNER JOIN Turma t
+    		ON (t.professor_id = p.professor_id )
+        INNER JOIN Tipo_Curso tc
+      		ON ( tc.tipo_curso_id = t.tipo_curso_id)
+        INNER JOIN Matricula m
+         	ON (m.turma_id = t.turma_id)
+        INNER JOIN Aluno a
+        	ON (a.aluno_id = m.aluno_id )
+        ORDER BY 1, t.turma_id, a.nome;
+
+-- 4.6) Listar os nomes dos professores e a turma que cada um leciona com maior número de alunos;
+SELECT p.nome, tt.turma_id, tt.total_alunos
+	FROM Professor p INNER JOIN LATERAL
+    	(SELECT t.turma_id, COUNT(1) as total_alunos
+         	FROM Matricula m, Turma t
+         	WHERE T.professor_id = p.professor_id
+         	AND m.turma_id = t.turma_id
+         GROUP BY 1
+         ORDER BY 2 DESC
+         LIMIT 1 ) tt ON TRUE
 -- 4.7) Listar os nomes dos alunos ordenados pela turma que estes possuem maior número de faltas. Deve aparecer apenas a turma que cada um dos alunos tem maior quantidade de faltas;
+
 -- 4.8) Listar a quantidade média de alunos por curso.
 -- 5) Fazer alterações nas tabelas:
 -- 5.1) Alterar o nome de todos os professores para maiúsculo;
